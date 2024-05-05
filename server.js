@@ -2,14 +2,16 @@ const express = require("express");
 const cors = require("cors");
 const config = require("./config/config.js");
 require('./config/db.js')
-const topProductsRoute = require("./routes/topProductsRoute.js")
+const topProductsRoute = require("./routes/topProductsRoute.js");
+const newProductsRoute = require("./routes/newProductsRoute.js");
 
 const app = express();
 
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 app.use(cors());
-app.use("/api", topProductsRoute)
+app.use("/api", topProductsRoute);
+app.use("/api/new", newProductsRoute);
 
 // home route 
 app.get("/", (req, res)=>{

@@ -1,6 +1,5 @@
 const { ObjectId } = require("mongodb");
 const Order = require("../models/ordersModel");
-// const SSLCommerzPayment = require("sslcommerz-lts");
 const SSLCommerzPayment = require('sslcommerz-lts')
 const store_id = process.env.STORE_ID;
 const store_passwd = process.env.STORE_PASS;
@@ -19,7 +18,7 @@ const orderCreate = async (req, res) => {
             currency: 'BDT',
             tran_id: tran_id, // use unique tran_id for each api call
             success_url: `http://localhost:5000/payment/success/${tran_id}`,
-            fail_url: 'http://localhost:3030/fail',
+            fail_url: `http://localhost:5000/payment/fail/${tran_id}`,
             cancel_url: 'http://localhost:3030/cancel',
             ipn_url: 'http://localhost:3030/ipn',
             shipping_method: 'Courier',
@@ -50,7 +49,13 @@ const orderCreate = async (req, res) => {
             // Redirect the user to payment gateway
             let GatewayPageURL = apiResponse.GatewayPageURL
             res.send({ url: GatewayPageURL })
-            
+                
+            const finalOrder = {
+                product,
+                paidStatus: false,
+                tranjectionId: tran_id
+            };
+            const result = Order.create(finalOrder)
 
             console.log('Redirecting to: ', GatewayPageURL)
         });

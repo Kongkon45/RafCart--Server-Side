@@ -4,6 +4,9 @@ const config = require("./config/config.js");
 require('./config/db.js')
 const topProductsRoute = require("./routes/topProductsRoute.js");
 const newProductsRoute = require("./routes/newProductsRoute.js");
+const orderRoute = require("./routes/ordersRoute.js");
+const paymentSuccessRoute = require("./routes/paymentSuccessRoute.js");
+const paymentFailRoute = require("./routes/paymentFailRoute.js")
 
 const app = express();
 
@@ -12,6 +15,9 @@ app.use(express.json());
 app.use(cors());
 app.use("/api", topProductsRoute);
 app.use("/api/new", newProductsRoute);
+app.use("/api", orderRoute);
+app.use(paymentSuccessRoute);
+app.use(paymentFailRoute);
 
 // home route 
 app.get("/", (req, res)=>{

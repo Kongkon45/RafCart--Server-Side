@@ -9,7 +9,7 @@ const paymentFail = async (req, res) => {
         );
         if (result.deletedCount) {
             res.redirect(
-                `http://localhost:3000/payment/fail/${req.params.tranId}`
+                `https://vercel.com/kongkon-jowarders-projects/raf-cart-server-side/payment/fail/${req.params.tranId}`
             )
         }
     } catch (error) {

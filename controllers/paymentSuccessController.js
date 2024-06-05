@@ -13,7 +13,10 @@ const paymentSuccess = async (req, res) => {
         );
         if (result.modifiedCount > 0) {
             res.redirect(
-                `https://raf-cart-client-side.vercel.app/payment/success/${req.params.tranId}`
+
+                // https://raf-cart-client-side.vercel.app/
+                
+                `http://localhost:3000/payment/success/${req.params.tranId}`
             )
         }
         

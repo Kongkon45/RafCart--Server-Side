@@ -29,9 +29,12 @@ const orderCreate = async (req, res) => {
         const data = {
             total_amount: product?.subTotal,
             currency: 'BDT',
-            tran_id: tran_id, // use unique tran_id for each api call
-            success_url: `https://rafcart-server-side.vercel.app/payment/success/${tran_id}`,
-            fail_url: `https://rafcart-server-side.vercel.app/payment/fail/${tran_id}`,
+            tran_id: tran_id, 
+
+            // https://raf-cart-server-side.vercel.app/
+            
+            success_url: `http://localhost:5000/payment/success/${tran_id}`,
+            fail_url: `http://localhost:5000/payment/fail/${tran_id}`,
             cancel_url: 'http://localhost:3030/cancel',
             ipn_url: 'http://localhost:3030/ipn',
             shipping_method: 'Courier',

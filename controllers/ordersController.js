@@ -1,10 +1,23 @@
+const express = require('express');
+const cors = require('cors');
+
+
 const { ObjectId } = require("mongodb");
 const Order = require("../models/ordersModel");
 const SSLCommerzPayment = require('sslcommerz-lts')
-const store_id = process.env.STORE_ID;
-const store_passwd = process.env.STORE_PASS;
+
+const app = express();
+
+// const store_id = process.env.STORE_ID;
+// const store_passwd = process.env.STORE_PASS;
+const store_id = "forti6645cc790efa4"
+const store_passwd = "forti6645cc790efa4@ssl" 
 const is_live = false //true for live, false for sandbox
 
+app.use(cors());
+
+// Middleware to parse JSON bodies
+app.use(express.json());
 
 // order post/create 
 const orderCreate = async (req, res) => {
@@ -17,8 +30,8 @@ const orderCreate = async (req, res) => {
             total_amount: product?.subTotal,
             currency: 'BDT',
             tran_id: tran_id, // use unique tran_id for each api call
-            success_url: `http://localhost:5000/payment/success/${tran_id}`,
-            fail_url: `http://localhost:5000/payment/fail/${tran_id}`,
+            success_url: `https://rafcart-server-side.vercel.app/payment/success/${tran_id}`,
+            fail_url: `https://rafcart-server-side.vercel.app/payment/fail/${tran_id}`,
             cancel_url: 'http://localhost:3030/cancel',
             ipn_url: 'http://localhost:3030/ipn',
             shipping_method: 'Courier',
@@ -65,6 +78,18 @@ const orderCreate = async (req, res) => {
 }
 
 
+// get order 
+const getAllOrder = async (req, res)=>{
+    try {
+        const orderData = await Order.find()
+        res.status(200).json({
+            message : "All Order data",
+            success : true,
+            data : orderData
+        })
+    } catch (error) {
+        res.status(500).json({message : error.message})
+    }
+}
 
-
-module.exports = { orderCreate};
+module.exports = { orderCreate, getAllOrder};

@@ -13,7 +13,7 @@ const paymentSuccess = async (req, res) => {
         );
         if (result.modifiedCount > 0) {
             res.redirect(
-                `https://vercel.com/kongkon-jowarders-projects/raf-cart-server-side/payment/success/${req.params.tranId}`
+                `https://raf-cart-client-side.vercel.app/payment/success/${req.params.tranId}`
             )
         }
         

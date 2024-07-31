@@ -16,7 +16,7 @@ const paymentSuccess = async (req, res) => {
 
                 // https://raf-cart-client-side.vercel.app/
                 
-                `http://localhost:3000/payment/success/${req.params.tranId}`
+                `https://raf-cart-client-side.vercel.app/payment/success/${req.params.tranId}`
             )
         }
         

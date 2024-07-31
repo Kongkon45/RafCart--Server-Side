@@ -12,7 +12,7 @@ const paymentFail = async (req, res) => {
 
                 // https://raf-cart-client-side.vercel.app/
                 
-                `http://localhost:3000/payment/fail/${req.params.tranId}`
+                `https://raf-cart-client-side.vercel.app/payment/fail/${req.params.tranId}`
             )
         }
     } catch (error) {
